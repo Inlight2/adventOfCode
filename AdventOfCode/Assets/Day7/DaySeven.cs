@@ -5,7 +5,25 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 public abstract class Gate {
+	protected bool solved = false;
+	int _solvedResult;
+	public int solvedResult {
+		get {
+			return _solvedResult;
+		}
+
+		private set {
+			_solvedResult = value;
+		}
+	}
+
 	public abstract int Resolve();
+
+	protected int Solve(int solution) {
+		solved = true;
+		solvedResult = solution;
+		return solution;
+	}
 }
 
 public class AndGate : Gate {
@@ -18,11 +36,15 @@ public class AndGate : Gate {
 	}
 
 	public override int Resolve() {
+		if (solved) {
+			return solvedResult;
+		}
+
 		Gate ga, gb;
 		int va, vb;
 		va = DaySeven.gates.TryGetValue (_A, out ga) ? ga.Resolve() : int.Parse(_A);
 		vb = DaySeven.gates.TryGetValue (_B, out gb) ? gb.Resolve() : int.Parse(_B);
-		return va & vb;
+		return Solve(va & vb);
 	}
 }
 
@@ -36,11 +58,15 @@ public class OrGate : Gate {
 	}
 
 	public override int Resolve() {
+		if (solved) {
+			return solvedResult;
+		}
+
 		Gate ga, gb;
 		int va, vb;
 		va = DaySeven.gates.TryGetValue (_A, out ga) ? ga.Resolve() : int.Parse(_A);
 		vb = DaySeven.gates.TryGetValue (_B, out gb) ? gb.Resolve() : int.Parse(_B);
-		return va & vb;
+		return Solve(va | vb);
 	}
 }
 
@@ -54,11 +80,15 @@ public class LeftShiftGate : Gate {
 	}
 
 	public override int Resolve() {
+		if (solved) {
+			return solvedResult;
+		}
+
 		Gate ga;
 		int va;
 		va = DaySeven.gates.TryGetValue (_A, out ga) ? ga.Resolve() : int.Parse(_A);
 
-		return va << value;
+		return Solve(va << value);
 	}
 }
 
@@ -72,10 +102,15 @@ public class RightShiftGate : Gate {
 	}
 
 	public override int Resolve() {
-		Gate ga;
-		DaySeven.gates.TryGetValue (_A, out ga);
+		if (solved) {
+			return solvedResult;
+		}
 
-		return ga.Resolve () >> value; 
+		Gate ga;
+		int va;
+		va = DaySeven.gates.TryGetValue (_A, out ga) ? ga.Resolve () : int.Parse (_A);
+
+		return Solve(va >> value); 
 	}
 }
 
@@ -86,11 +121,15 @@ public class NotGate : Gate {
 		_A = A;
 	}
 
-	public override int Resolve ()
-	{
+	public override int Resolve () {
+		if (solved) {
+			return solvedResult;
+		}
+
 		Gate ga;
-		DaySeven.gates.TryGetValue (_A, out ga);
-		return ~ga.Resolve();
+		int va;
+		va = DaySeven.gates.TryGetValue (_A, out ga) ? ga.Resolve() : int.Parse (_A);
+		return Solve(~va);
 	}
 }
 
@@ -102,7 +141,11 @@ public class ValueGate : Gate {
 	}
 
 	public override int Resolve () {
-		return value;
+		if (solved) {
+			return solvedResult;
+		}
+
+		return Solve(value);
 	}
 }
 
@@ -114,9 +157,14 @@ public class Wire : Gate {
 	}
 
 	public override	int Resolve () {
+		if (solved) {
+			return solvedResult;
+		}
+
 		Gate ga;
-		DaySeven.gates.TryGetValue (_A, out ga);
-		return ga.Resolve ();
+		int va;
+		va = DaySeven.gates.TryGetValue (_A, out ga) ? ga.Resolve() : int.Parse(_A);
+		return Solve(va);
 	}
 }
 	
@@ -126,6 +174,10 @@ public class DaySeven : ReadBase {
 	public static Dictionary<string, Gate> gates = new Dictionary<string, Gate>();
 
 	void Start () {
+		StartCoroutine (Run ());
+	}
+
+	IEnumerator Run () {
 		foreach (string str in reader.lines) {
 			if (str.Contains ("NOT")) {
 				Not (str);
@@ -142,12 +194,14 @@ public class DaySeven : ReadBase {
 			} else {
 				Wire (str);
 			}
+			yield return null;
 		}
 
 		Gate finalGate;
 		gates.TryGetValue("a", out finalGate);
-
-		Debug.Log (finalGate.Resolve ());
+		yield return null;
+		int finalint = finalGate.Resolve ();
+		Debug.Log (finalint);
 			
 	}
 
