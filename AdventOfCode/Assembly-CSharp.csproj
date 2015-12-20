@@ -52,9 +52,11 @@
      <Compile Include="Assets\Day5\DayFive.cs" />
      <Compile Include="Assets\Day6\DaySix.cs" />
      <Compile Include="Assets\Day7\DaySeven.cs" />
+     <Compile Include="Assets\Day8\DayEight.cs" />
      <Compile Include="Assets\LineReader.cs" />
      <Compile Include="Assets\Point.cs" />
      <Compile Include="Assets\ReadBase.cs" />
+     <None Include="Assets\Day8\input.txt" />
      <None Include="Assets\Day7\input.txt" />
      <None Include="Assets\Day3\input.txt" />
      <None Include="Assets\Day1\input.txt" />
