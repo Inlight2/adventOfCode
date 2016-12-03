@@ -45,24 +45,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Day1\DayOne.cs" />
-     <Compile Include="Assets\Day2\DayTwo.cs" />
-     <Compile Include="Assets\Day3\DayThree.cs" />
-     <Compile Include="Assets\Day4\DayFour.cs" />
-     <Compile Include="Assets\Day5\DayFive.cs" />
-     <Compile Include="Assets\Day6\DaySix.cs" />
-     <Compile Include="Assets\Day7\DaySeven.cs" />
-     <Compile Include="Assets\Day8\DayEight.cs" />
+     <Compile Include="Assets\2015\Day1\DayOne.cs" />
+     <Compile Include="Assets\2015\Day2\DayTwo.cs" />
+     <Compile Include="Assets\2015\Day3\DayThree.cs" />
+     <Compile Include="Assets\2015\Day4\DayFour.cs" />
+     <Compile Include="Assets\2015\Day5\DayFive.cs" />
+     <Compile Include="Assets\2015\Day6\DaySix.cs" />
+     <Compile Include="Assets\2015\Day7\DaySeven.cs" />
+     <Compile Include="Assets\2015\Day8\DayEight.cs" />
+     <Compile Include="Assets\2016\Day1\DayOne.cs" />
+     <Compile Include="Assets\2016\Day2\DayTwo.cs" />
      <Compile Include="Assets\LineReader.cs" />
      <Compile Include="Assets\Point.cs" />
      <Compile Include="Assets\ReadBase.cs" />
-     <None Include="Assets\Day8\input.txt" />
-     <None Include="Assets\Day7\input.txt" />
-     <None Include="Assets\Day3\input.txt" />
-     <None Include="Assets\Day1\input.txt" />
-     <None Include="Assets\Day2\input.txt" />
-     <None Include="Assets\Day6\input.txt" />
-     <None Include="Assets\Day5\input.txt" />
+     <None Include="Assets\2015\Day8\input.txt" />
+     <None Include="Assets\2015\Day7\input.txt" />
+     <None Include="Assets\2016\Day2\inputB.txt" />
+     <None Include="Assets\2015\Day3\input.txt" />
+     <None Include="Assets\2016\Day1\input.txt" />
+     <None Include="Assets\2016\Day1\inputB.txt" />
+     <None Include="Assets\2015\Day1\input.txt" />
+     <None Include="Assets\2016\Day2\input.txt" />
+     <None Include="Assets\2015\Day2\input.txt" />
+     <None Include="Assets\2015\Day6\input.txt" />
+     <None Include="Assets\2015\Day5\input.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
